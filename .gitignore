@@ -1,7 +1,9 @@
 venv
+.env
 __pycache__
 *.pyc
 enerv.py
 mars.py
 *.csv
 result
+results/
