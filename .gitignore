@@ -5,5 +5,5 @@ __pycache__
 enerv.py
 mars.py
 *.csv
-result
 results/
+!results/.gitkeep

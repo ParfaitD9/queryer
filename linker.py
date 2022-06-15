@@ -114,7 +114,7 @@ def claim_mail(host) -> tuple[str]:
             'User-Agent': "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.61 Safari/537.36"
         })
         mail_regex = '^mailto:(?P<mail>\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3})$'
-        tel_regex = '^tel:(?P<tel>.+)$'
+        tel_regex = '^(tel:|https://wa.me/)(?P<tel>.+)$'
         try:
             r = s.get(host)
         except (Exception,) as e:

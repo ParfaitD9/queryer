@@ -14,7 +14,7 @@ parser.add_argument(
     '--engines',
     '-e',
     help='Moteurs de recherches à utiliser pour la recherche',
-    default='0123'
+    default='01234'
 )
 parser.add_argument(
     '--search',

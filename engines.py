@@ -15,6 +15,9 @@ class SearchEngine:
         self.headless = headless
         self.bar_name = bar_name
 
+    def __str__(self) -> str:
+        return self.name
+
 
 bing = SearchEngine(
     'Bing',
@@ -28,7 +31,6 @@ brave = SearchEngine(
     '//a[@class="result-header"]',
     'https://search.brave.com/',
     '//*[@id="pagination"]/a'
-
 )
 
 qwant = SearchEngine(
@@ -54,4 +56,4 @@ mojeek = SearchEngine(
     headless=True
 )
 
-_engines = [google, mojeek, qwant, bing]
+_engines = [google, mojeek, brave, bing, qwant]
