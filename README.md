@@ -34,13 +34,13 @@ Cette commande recherche **Magasin voiture Bénin** avec une profondeur de **4**
 
 #### Tables des moteurs de recherches pour l'arguments engines
 
-| Code | Moteur                            |
-| ---- | --------------------------------- |
-| 0    | [Google](https://google.com)      |
-| 1    | [Mojeek](https://mojeek.com)      |
-| 2    | [Brave](https://search.brave.com) |
-| 3    | [Bing](https://bing.com)          |
-| 4    | [Qwant](https://qwant.com)        |
+| Code | Moteur                                   |
+| ---- | ---------------------------------------- |
+| 0    | [Google](https://google.com)             |
+| 1    | [Mojeek](https://mojeek.com)             |
+| 2    | [Brave](https://search.brave.com) (Bêta) |
+| 3    | [Bing](https://bing.com)                 |
+| 4    | [Qwant](https://qwant.com)               |
 
 ### extract
 
@@ -59,9 +59,12 @@ En dehors des modules du fichier `requirements.txt`, vous aurez besoin du naviga
 
 1. Ouvrez votre terminal
 2. Clonez le repo ci avec la commande `git clone https://github.com/ParfaitD9/queryer.git`
-3. Créez un environnement virtuel afin d'isoler vos dépendances `python -m venv venv`
-4. Activez votre environnement virtuel : `source venv/bin/activate` sous Linux/MacOS ou `venv/Scripts/activate`
-5. Renommez le fichier .env.exemple en .env et specifiez le chemin pour chromedriver
-6. Installez les dépendances nécessaires avec `pip install -r requirements.txt`
+3. Rendez vous dans le dossier **queryer** créé
+4. Créez un environnement virtuel afin d'isoler vos dépendances `python -m venv venv`
+5. Activez votre environnement virtuel : `source venv/bin/activate` sous Linux/MacOS ou `venv/Scripts/activate`
+6. Renommez le fichier .env.exemple en .env et specifiez le chemin pour chromedriver
+7. Installez les dépendances nécessaires avec `pip install -r requirements.txt`
 
 Votre programme est maintenant en place. Let's enjoy.
+
+Vous pouvez lancez une des commandes de [commandes](#commandes) pour vérifier. Vos résultats de recherches sont disponibles dans le dossier **results**.
