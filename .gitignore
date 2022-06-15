@@ -6,3 +6,4 @@ enerv.py
 mars.py
 *.csv
 results/*
+!results/.gitkeep
