@@ -1,6 +1,6 @@
 # Queryer
 
-Queryer est un outil de web crawling écrit en Python qui vous permet d'accélérer vos recherches sur le web. Il utilise principalement le module (https://selenium.dev)[Selenium] et les techniques de web scraping pour vous permettre de lancer la même recherche sur plusieurs moteurs de recherche à la fois et de vous fournir une sortie formattée selon votre choix. Il offre aussi l'extraction d'addresse mail et de numéro de téléphone depuis différents site web.
+Queryer est un outil de web crawling écrit en Python qui vous permet d'accélérer vos recherches sur le web. Il utilise principalement le module [Selenium](https://selenium.dev) et les techniques de web scraping pour vous permettre de lancer la même recherche sur plusieurs moteurs de recherche à la fois et de vous fournir une sortie formattée selon votre choix. Il offre aussi l'extraction d'addresse mail et de numéro de téléphone depuis différents site web.
 
 ## Fonctionnalités
 
@@ -36,16 +36,16 @@ Cette commande recherche **Magasin voiture Bénin** avec une profondeur de **4**
 
 | Code | Moteur                            |
 | ---- | --------------------------------- |
-| 0    | (https://google.com)[Google]      |
-| 1    | (https://mojeek.com)[Mojeek]      |
-| 2    | (https://search.brave.com)[Brave] |
-| 3    | (https://bing.com)[Bing]          |
-| 4    | (https://qwant.com)[Qwant]        |
+| 0    | [Google](https://google.com)      |
+| 1    | [Mojeek](https://mojeek.com)      |
+| 2    | [Brave](https://search.brave.com) |
+| 3    | [Bing](https://bing.com)          |
+| 4    | [Qwant](https://qwant.com)        |
 
 ### extract
 
 La commande `extract` permet l'extraction de mail et téléphone d'un site web.
-L'exemple suivant permet d'extraire mail et téléphone du site (https://becrypto-coinlist.herokuapp.com/)[BeCrypto Coinlist].
+L'exemple suivant permet d'extraire mail et téléphone du site [BeCrypto Coinlist](https://becrypto-coinlist.herokuapp.com/).
 
 `python start.py extract -H https://becrypto-coinlist.herokuapp.com/`
 
