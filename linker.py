@@ -201,7 +201,7 @@ def _search(engines: str = '0123', search: str = 'Hello', out: str = 'results.js
     final = sorted([{
         'path': path,
         'rate': res.count(path)
-    } for path in uniks], key=lambda x: x.get('rate'))
+    } for path in uniks], key=lambda x: x.get('rate'), reverse=True)
 
     with open(f'results/{out}', 'w') as w:
         if out.split('.')[-1] == 'json':
