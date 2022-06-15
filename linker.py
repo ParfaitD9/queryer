@@ -57,7 +57,7 @@ class Linker:
         else:
             self.get(engine.host)
             self.driver.implicitly_wait(4)
-            bar = self.driver.find_element(By.NAME, engine.bar_name)
+            bar = self.driver.find_element(*engine.bar_name)
             bar.send_keys(keywords)
             bar.send_keys(Keys.RETURN)
             time.sleep(2)

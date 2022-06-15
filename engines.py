@@ -4,7 +4,7 @@ class SearchEngine:
                  result_selector: str,
                  host: str,
                  next_selector: str,
-                 bar_name: str = 'q',
+                 bar_name: tuple[str] = ('name', 'q'),
                  headless: bool = False
                  ) -> None:
 
@@ -30,7 +30,8 @@ brave = SearchEngine(
     'Brave',
     '//a[@class="result-header"]',
     'https://search.brave.com/',
-    '//*[@id="pagination"]/a'
+    '//*[@id="pagination"]/a',
+    bar_name=('id', 'searchbox')
 )
 
 qwant = SearchEngine(
