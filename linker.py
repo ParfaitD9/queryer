@@ -7,6 +7,9 @@ from requests.sessions import Session
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.firefox.service import Service as FirefoxService
+from selenium.webdriver.firefox.options import Options as FirefoxOptions
+from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver import ActionChains
@@ -19,15 +22,27 @@ from requests.sessions import Session
 
 
 class Linker:
-    def __init__(self) -> None:
-        opts = Options()
-        opts.add_argument('--headless')
-        s = Service(
-            executable_path=os.getenv('CHROMEDRIVER_PATH'))
-        self.driver = webdriver.Chrome(
-            service=s,
-            options=opts
-        )
+    def __init__(self, browser='chrome') -> None:
+        if browser == 'chrome':
+            opts = Options()
+            opts.add_argument('--headless')
+            s = Service(
+                executable_path=os.getenv('CHROMEDRIVER_PATH'))
+            self.driver = webdriver.Chrome(
+                service=s,
+                options=opts
+            )
+        elif browser == 'firefox':
+            opts = FirefoxOptions()
+            # opts.add_argument('--headless')
+            s = FirefoxService(
+                executable_path=os.getenv('GECKODRIVER_PATH')
+            )
+            self.driver = webdriver.Firefox(
+                service=s,
+                options=opts
+            )
+
         self.session = Session()
         self.session.headers.update({
             'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:101.0) Gecko/20100101 Firefox/101.0',
@@ -52,7 +67,7 @@ class Linker:
                     )
                     soup = BeautifulSoup(r.text, 'html.parser')
                     results.extend([
-                        Linker.clean(link.attrs.get('href')) for link in soup.select(engine.result_selector)
+                        Linker.clean(link.attrs.get('href')) for link in soup.select(engine.result_selector[-1])
                     ])
         else:
             self.get(engine.host)
@@ -65,22 +80,28 @@ class Linker:
             for _ in range(deep):
                 results.extend(
                     [Linker.clean(el.get_attribute('href')) for el in self.driver.find_elements(
-                        By.XPATH, engine.result_selector) if (Linker.is_external(el.get_attribute('href'))
-                                                              and not Linker.is_commercial(el.get_attribute('href')))]
+                        *engine.result_selector) if (Linker.is_external(el.get_attribute('href'))
+                                                     and not Linker.is_commercial(el.get_attribute('href')))]
                 )
 
                 try:
-                    _next = self.driver.find_element(
-                        By.XPATH, engine.next_selector)
+                    _next = self.driver.find_element(*engine.next_selector)
                 except (Exception, ) as e:
                     break
                 else:
+                    if self.driver.name == 'firefox':
+                        self.move_to(_next)
                     ActionChains(self.driver).move_to_element(
                         _next).click().perform()
                     if engine.name == 'Qwant':
                         time.sleep(3)
                 self.driver.implicitly_wait(3)
         return results
+
+    def move_to(self, obj: WebElement):
+        cmd = 'window.scrollTo(%s, %s)' % (
+            obj.location.get('x'), obj.location.get('y'))
+        self.driver.execute_script(cmd)
 
     def close(self):
         self.driver.close()
@@ -184,9 +205,10 @@ def slug(chain: str):
         .encode('ascii', 'ignore').decode().replace(' ', '-')
 
 
-def _search(engines: str = '0123', search: str = 'Hello', out: str = 'results.json', deep: int = 5):
+def _search(browser: str = 'chrome', engines: str = '0123', search: str = 'Hello', out: str = 'results.json', deep: int = 5):
     res = list()
-    linker = Linker()
+    linker = Linker(browser=browser)
+    print(f"Session started with {linker.driver.name} !")
     for i in [int(k) for k in engines]:
         eng = _engines[i]
         print(f'Crawling with {eng.name} ....')
@@ -203,7 +225,7 @@ def _search(engines: str = '0123', search: str = 'Hello', out: str = 'results.js
         'rate': res.count(path)
     } for path in uniks], key=lambda x: x.get('rate'), reverse=True)
 
-    with open(f'results/{out}', 'w') as w:
+    with open(f'./results/{out}', 'w') as w:
         if out.split('.')[-1] == 'json':
             json.dump(final, w)
         elif out.split('.')[-1] == 'csv':

@@ -7,3 +7,4 @@ mars.py
 *.csv
 results/*
 !results/.gitkeep
+*.log

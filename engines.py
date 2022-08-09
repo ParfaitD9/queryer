@@ -1,9 +1,12 @@
+from selenium.webdriver.common.by import By
+
+
 class SearchEngine:
     def __init__(self,
                  name: str,
-                 result_selector: str,
+                 result_selector: tuple[str],
                  host: str,
-                 next_selector: str,
+                 next_selector: tuple[str],
                  bar_name: tuple[str] = ('name', 'q'),
                  headless: bool = False
                  ) -> None:
@@ -21,37 +24,37 @@ class SearchEngine:
 
 bing = SearchEngine(
     'Bing',
-    '//h2/a',
+    (By.XPATH, '//h2/a'),
     'https://bing.com/',
-    '(//*[@id="b_results"]/li/nav/ul/li/a)[last()]'
+    (By.XPATH, '(//*[@id="b_results"]/li/nav/ul/li/a)[last()]')
 )
 
 brave = SearchEngine(
     'Brave',
-    '//a[@class="result-header"]',
+    (By.XPATH, '//a[@class="result-header"]'),
     'https://search.brave.com/',
-    '//*[@id="pagination"]/a',
+    (By.XPATH, '//*[@id="pagination"]/a'),
     bar_name=('id', 'searchbox')
 )
 
 qwant = SearchEngine(
     'Qwant',
-    "//a[contains(@class, 'external')]",
+    (By.XPATH, "//a[contains(@class, 'external')]"),
     'https://www.qwant.com/',
-    '//*[@id="root"]/div[2]/div[3]/div[1]/div[2]/section/button'
+    (By.XPATH, '//*[@id="root"]/div[2]/div[3]/div[1]/div[2]/section/button')
 )
 
 google = SearchEngine(
     'Google',
-    '//div[@class="yuRUbf"]/a',
+    (By.XPATH, '//div[@class="yuRUbf"]/a'),
     'https://www.google.com/',
-    '//a[@id="pnnext"]'
+    (By.XPATH, '//a[@id="pnnext"]')
 )
 
 
 mojeek = SearchEngine(
     'Mojeek',
-    'a.ob',
+    (By.CSS_SELECTOR, 'a.ob'),
     'https://www.mojeek.com/search',
     '',
     headless=True
