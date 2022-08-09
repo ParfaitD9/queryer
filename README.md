@@ -25,6 +25,7 @@ Le fichier d'exécution du programme est le fichier `start.py` qui founi les com
 | --engines | -e        | Moteurs de recherches à utiliser | 01234                      | C'est une combinaison de valeur entre 0 et 4 pour exprimer le.s moteurs pour la recherche.      |
 | --deep    | -d        | Profondeur de la recherche       | 3                          | C'est un entier qui défini combien de page seront parcouru pour chaque moteur                   |
 | --output  | -o        | Fichier de sortie                | <slug-de-la-recherche.csv> | Fichier de redirection des résultats. Les formats CSV et JSON sont supportés.                   |
+| --browser | -b        | Navigateur web à utilser         | chrome                     | Une valeur de l'ensemblre {chrome, firefox}                                                     |
 
 Pour lancer par exemple une recherche sur des magasins de voiture au Bénin par exemple, vous pouvez juste lancer:
 
@@ -62,7 +63,7 @@ En dehors des modules du fichier `requirements.txt`, vous aurez besoin du naviga
 3. Rendez vous dans le dossier **queryer** créé
 4. Créez un environnement virtuel afin d'isoler vos dépendances `python -m venv venv`
 5. Activez votre environnement virtuel : `source venv/bin/activate` sous Linux/MacOS ou `venv/Scripts/activate`
-6. Renommez le fichier .env.exemple en .env et specifiez le chemin pour chromedriver
+6. Renommez le fichier .env.exemple en .env et specifiez le chemin pour chromedriver et/ou geckodriver
 7. Installez les dépendances nécessaires avec `pip install -r requirements.txt`
 
 Votre programme est maintenant en place. Let's enjoy.
